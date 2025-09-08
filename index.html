@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #4299e1;
+            color: #fff;
+            border-bottom: 3px solid #63b3ed;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #fff;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start min-h-screen p-4 md:p-8">
+
+    <div class="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-4xl border border-gray-700">
+        
+        <!-- Header and Tab Navigation -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4 sm:mb-0">GitHub Pages Showcase</h1>
+            <div class="flex space-x-2 bg-gray-700 rounded-full p-1 shadow-inner">
+                <button id="canTab" class="tab-button active px-6 py-2 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Can</button>
+                <button id="cannotTab" class="tab-button px-6 py-2 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Can't</button>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="canContent" class="fade-in">
+
+            <!-- Title Bar Section -->
+            <section class="mb-8 p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">Title Bar Example</h2>
+                <div class="bg-gray-900 text-gray-400 p-3 rounded-lg flex items-center justify-between shadow-sm">
+                    <span class="font-bold text-lg text-blue-400">Your Site Title</span>
+                    <div class="flex space-x-4 text-sm font-medium">
+                        <a href="#" class="hover:text-white transition-colors duration-200">Home</a>
+                        <a href="#" class="hover:text-white transition-colors duration-200">About</a>
+                        <a href="#" class="hover:text-white transition-colors duration-200">Contact</a>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-400">This demonstrates that a static site can have a navigation bar and a title, styled with CSS.</p>
+            </section>
+
+            <!-- CSS Animations Section -->
+            <section class="mb-8 p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">CSS Animations</h2>
+                <button class="bg-blue-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300 pulse-animation">
+                    Animated Button
+                </button>
+                <p class="mt-4 text-sm text-gray-400">CSS animations and transitions are a core feature of web browsers and work perfectly on a static site.</p>
+            </section>
+            
+            <!-- JavaScript Functionality -->
+            <section class="mb-8 p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">JavaScript Interactivity</h2>
+                <p class="text-gray-300 mb-2">Click the button to see the counter increment.</p>
+                <div class="flex items-center space-x-4">
+                    <span id="counterDisplay" class="text-3xl font-bold text-green-400">0</span>
+                    <button id="counterButton" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition-colors duration-300">
+                        Add 1
+                    </button>
+                </div>
+                <p class="mt-4 text-sm text-gray-400">Client-side scripting with JavaScript is fully supported. You can build complex user interfaces and dynamic content without a backend.</p>
+            </section>
+
+            <!-- Text Generation with LLM -->
+            <section class="mb-8 p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">LLM Text Generation</h2>
+                <p class="text-gray-300 mb-4">Generate text by calling an external LLM API from the browser. This demonstrates how a static site can leverage a backend without hosting it itself.</p>
+                <div class="flex items-center space-x-2">
+                    <select id="textPrompt" class="bg-gray-800 text-white p-2 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                        <option value="neutral">Neutral</option>
+                    </select>
+                    <button id="generateButton" class="bg-purple-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-purple-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        Generate Text
+                    </button>
+                </div>
+                <div id="generationResult" class="mt-4 p-4 bg-gray-800 rounded-lg border border-gray-700 min-h-[100px] flex items-center justify-center text-gray-400">
+                    <div id="spinner" class="spinner hidden"></div>
+                    <span id="resultText">Select an option and click "Generate Text" to see the output.</span>
+                </div>
+            </section>
+
+            <!-- Fetching Live Data from APIs -->
+            <section class="mb-8 p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">Fetching Data from External APIs</h2>
+                <p class="text-gray-300 mb-4">A static site can't run server-side code, but it can make calls to external APIs to fetch live, up-to-date data and display it on the page.</p>
+                <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg shadow-inner">
+                    <p class="text-lg font-bold text-yellow-300">Bitcoin Price:</p>
+                    <span id="bitcoinPrice" class="text-xl font-mono text-green-400">...</span>
+                    <button id="fetchPriceBtn" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition-colors duration-300">
+                        Get Price
+                    </button>
+                </div>
+                <p class="mt-4 text-sm text-gray-400">This demonstrates how a static site can feel dynamic by fetching and updating information without a backend of its own.</p>
+            </section>
+
+            <!-- Embedding Third-Party Services -->
+            <section class="p-6 bg-gray-700 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-2 text-blue-300">Embedding External Services</h2>
+                <p class="text-gray-300 mb-4">A static site can't handle payment processing directly, but it can embed a third-party service, such as a payment form from Stripe or PayPal.</p>
+                
+                <div class="bg-gray-800 p-6 rounded-lg shadow-inner border border-gray-700 max-w-sm mx-auto">
+                    <h3 class="text-lg font-semibold text-white mb-4">Payment Form Example</h3>
+                    <form onsubmit="event.preventDefault(); showMessage('Payment successful!');" class="space-y-4">
+                        <div>
+                            <label for="cardNumber" class="block text-gray-400 mb-1">Card Number</label>
+                            <input id="cardNumber" type="text" placeholder="**** **** **** ****" class="w-full bg-gray-900 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <label for="expDate" class="block text-gray-400 mb-1">Exp Date</label>
+                                <input id="expDate" type="text" placeholder="MM/YY" class="w-full bg-gray-900 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex-1">
+                                <label for="cvv" class="block text-gray-400 mb-1">CVV</label>
+                                <input id="cvv" type="text" placeholder="***" class="w-full bg-gray-900 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-600 transition-colors duration-300">
+                            Pay Now
+                        </button>
+                        <p id="paymentMessage" class="mt-4 text-center text-sm font-semibold hidden"></p>
+                    </form>
+                </div>
+
+                <p class="mt-4 text-sm text-gray-400">By embedding code snippets provided by external services, you can integrate complex functionality without needing your own server.</p>
+            </section>
+
+        </div>
+
+        <div id="cannotContent" class="hidden fade-in">
+            <div class="space-y-8 p-6">
+                
+                <!-- Account and User Management -->
+                <section class="p-6 bg-gray-700 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-2 text-red-300">User Accounts and Authentication</h2>
+                    <p class="text-gray-300">
+                        GitHub Pages cannot manage user accounts, authentication (like login/logout), or personalized content. It is a static environment, meaning all users see the same content.
+                    </p>
+                    <div class="mt-4 text-sm text-gray-400 p-3 border border-gray-600 rounded-lg bg-gray-800 flex items-center space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 105.636 5.636 9 9 0 0018.364 18.364zM16 12a4 4 0 11-8 0 4 4 0 018 0zm-2 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span>Example: A "Sign In" button that needs to check a password in a database won't work.</span>
+                    </div>
+                </section>
+
+                <!-- Sending Emails and Server Logic -->
+                <section class="p-6 bg-gray-700 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-2 text-red-300">Server-Side Functionality</h2>
+                    <p class="text-gray-300">
+                        Any functionality that requires a server, such as sending emails from a contact form, processing form submissions, or running backend scripts, is not possible.
+                    </p>
+                    <div class="mt-4 text-sm text-gray-400 p-3 border border-gray-600 rounded-lg bg-gray-800 flex items-center space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span>Example: A contact form that submits to an email address requires a backend.</span>
+                    </div>
+                </section>
+                
+                <!-- Database and File Storage -->
+                <section class="p-6 bg-gray-700 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-2 text-red-300">Database and File Storage</h2>
+                    <p class="text-gray-300">
+                        You cannot store or retrieve data from a database, nor can you handle file uploads directly on GitHub Pages. It's designed for serving pre-built files.
+                    </p>
+                    <div class="mt-4 text-sm text-gray-400 p-3 border border-gray-600 rounded-lg bg-gray-800 flex items-center space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M16 12h.01" />
+                        </svg>
+                        <span>Example: A blog with comments requires a database to store them.</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        const canTab = document.getElementById('canTab');
+        const cannotTab = document.getElementById('cannotTab');
+        const canContent = document.getElementById('canContent');
+        const cannotContent = document.getElementById('cannotContent');
+
+        function showContent(sectionToShow) {
+            canContent.classList.add('hidden');
+            cannotContent.classList.add('hidden');
+            canTab.classList.remove('active');
+            cannotTab.classList.remove('active');
+
+            if (sectionToShow === 'can') {
+                canContent.classList.remove('hidden');
+                canContent.classList.add('fade-in');
+                canTab.classList.add('active');
+            } else {
+                cannotContent.classList.remove('hidden');
+                cannotContent.classList.add('fade-in');
+                cannotTab.classList.add('active');
+            }
+        }
+
+        canTab.addEventListener('click', () => showContent('can'));
+        cannotTab.addEventListener('click', () => showContent('cannot'));
+
+        // Counter functionality
+        const counterButton = document.getElementById('counterButton');
+        const counterDisplay = document.getElementById('counterDisplay');
+        let count = 0;
+
+        counterButton.addEventListener('click', () => {
+            count++;
+            counterDisplay.textContent = count;
+        });
+
+        // LLM Text generation
+        const generateButton = document.getElementById('generateButton');
+        const textPromptSelect = document.getElementById('textPrompt');
+        const generationResultDiv = document.getElementById('generationResult');
+        const resultTextSpan = document.getElementById('resultText');
+        const spinner = document.getElementById('spinner');
+
+        const apiKey = "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        generateButton.addEventListener('click', async () => {
+            const promptType = textPromptSelect.value;
+            let userQuery;
+            if (promptType === 'positive') {
+                userQuery = 'Write a positive, short paragraph about the benefits of static websites.';
+            } else if (promptType === 'negative') {
+                userQuery = 'Write a short paragraph about the disadvantages and limitations of static websites.';
+            } else {
+                userQuery = 'Write a neutral, short paragraph describing what a static website is.';
+            }
+
+            generationResultDiv.classList.add('items-center', 'justify-center');
+            resultTextSpan.textContent = '';
+            spinner.classList.remove('hidden');
+            generateButton.disabled = true;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: "You are a helpful assistant. Provide a concise, single-paragraph response." }]
+                },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    resultTextSpan.textContent = text;
+                } else {
+                    resultTextSpan.textContent = 'Failed to generate text. Please try again.';
+                }
+
+            } catch (error) {
+                console.error('Error generating text:', error);
+                resultTextSpan.textContent = 'An error occurred. Check the console for details.';
+            } finally {
+                spinner.classList.add('hidden');
+                generateButton.disabled = false;
+                generationResultDiv.classList.remove('items-center', 'justify-center');
+                generationResultDiv.classList.remove('justify-center');
+            }
+        });
+
+        // Bitcoin price fetching
+        const fetchPriceBtn = document.getElementById('fetchPriceBtn');
+        const bitcoinPriceSpan = document.getElementById('bitcoinPrice');
+        const bitcoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+
+        fetchPriceBtn.addEventListener('click', async () => {
+            bitcoinPriceSpan.textContent = 'Fetching...';
+            try {
+                const response = await fetch(bitcoinApiUrl);
+                const data = await response.json();
+                if (data.bitcoin && data.bitcoin.usd) {
+                    bitcoinPriceSpan.textContent = `$${data.bitcoin.usd.toLocaleString()}`;
+                } else {
+                    bitcoinPriceSpan.textContent = 'Price not available';
+                }
+            } catch (error) {
+                console.error('Error fetching Bitcoin price:', error);
+                bitcoinPriceSpan.textContent = 'Error fetching price';
+            }
+        });
+
+        // Payment message logic
+        const paymentMessage = document.getElementById('paymentMessage');
+        function showMessage(msg) {
+            paymentMessage.textContent = msg;
+            paymentMessage.classList.remove('hidden');
+            paymentMessage.classList.add('text-green-500');
+            setTimeout(() => {
+                paymentMessage.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
