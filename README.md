@@ -1,2 +1,2 @@
-# GithubSitesTest
-What you can do with Github Sites.
+# Github Pages Test
+What you can do with Github Pages.
